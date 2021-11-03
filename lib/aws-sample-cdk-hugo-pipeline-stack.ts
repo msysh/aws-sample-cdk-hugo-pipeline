@@ -25,12 +25,12 @@ export class AwsSampleCdkHugoPipelineStack extends cdk.Stack {
 
     // S3 for Content Bucket
     const contentBucket = new s3.Bucket(this, `${PREFIX}-content-bucket`, {
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      removalPolicy: cdk.RemovalPolicy.RETAIN
     });
 
     // S3 for Access Log Bucket
     const logBucket = new s3.Bucket(this, `${PREFIX}-log-bucket`, {
-      removalPolicy: cdk.RemovalPolicy.DESTROY
+      removalPolicy: cdk.RemovalPolicy.RETAIN
     })
 
     // Origin Access Identity
@@ -207,7 +207,7 @@ export class AwsSampleCdkHugoPipelineStack extends cdk.Stack {
 
     // S3 for CodePipeline ArtifactStore
     const artifactBucket = new s3.Bucket(this, `${PREFIX}-artifact-bucket`, {
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      removalPolicy: cdk.RemovalPolicy.RETAIN
     });
 
     // IAM Role for CodePipeline
