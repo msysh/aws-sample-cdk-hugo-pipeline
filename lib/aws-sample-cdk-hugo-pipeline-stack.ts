@@ -28,6 +28,11 @@ export class AwsSampleCdkHugoPipelineStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
+    // S3 for Access Log Bucket
+    const logBucket = new s3.Bucket(this, `${PREFIX}-log-bucket`, {
+      removalPolicy: cdk.RemovalPolicy.DESTROY
+    })
+
     // Origin Access Identity
     const oai = new cloudfront.OriginAccessIdentity(this, `${PREFIX}-oai`);
 
@@ -56,9 +61,10 @@ export class AwsSampleCdkHugoPipelineStack extends cdk.Stack {
         viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
       },
       defaultRootObject: 'index.html',
-      // TODO : Logging
-      // enableLogging: true,
-      // logBucket:
+      enableLogging: true,
+      logBucket: logBucket,
+      // logFilePrefix: '',
+      logIncludesCookies: false,
       enabled: true,
       httpVersion: cloudfront.HttpVersion.HTTP2,
       minimumProtocolVersion: cloudfront.SecurityPolicyProtocol.TLS_V1_2_2021,
