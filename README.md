@@ -69,5 +69,5 @@ at `cdk.json`
 
 ## TODO
 
-* Enable access logging for CloudFront
+* ~~Enable access logging for CloudFront~~ (#1)
 * Invalidate CloudFront cache when the contents are delivered
