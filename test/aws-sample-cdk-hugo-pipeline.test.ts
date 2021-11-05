@@ -1,13 +1,20 @@
 import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
 import * as cdk from '@aws-cdk/core';
-import * as AwsSampleCdkHugoPipeline from '../lib/aws-sample-cdk-hugo-pipeline-stack';
+import * as HugoPipeline from '../lib/hugo-pipeline-stack';
+import * as CloudFrontFunctionsStack from '../lib/cloudfront-functions-stack';
 
 test('Empty Stack', () => {
+  /*
     const app = new cdk.App();
     // WHEN
-    const stack = new AwsSampleCdkHugoPipeline.AwsSampleCdkHugoPipelineStack(app, 'MyTestStack');
+    const cffStack = new CloudFrontFunctionsStack.CloudFrontFunctionsStack(app, 'MyCloudFrontFunctionsStack');
+    const stack = new HugoPipeline.HugoPipelineStack(app, 'MyTestStack', { appendIndexCfFunction: cffStack.stackProps.appendIndexCfFunction });
     // THEN
+    expectCDK(cffStack).to(matchTemplate({
+      "Resources": {}
+    }, MatchStyle.EXACT));
     expectCDK(stack).to(matchTemplate({
       "Resources": {}
-    }, MatchStyle.EXACT))
+    }, MatchStyle.EXACT));
+  */
 });

@@ -9,8 +9,10 @@ import * as iam from '@aws-cdk/aws-iam';
 import * as logs from '@aws-cdk/aws-logs';
 import * as s3 from '@aws-cdk/aws-s3';
 
-export class AwsSampleCdkHugoPipelineStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+import * as cffunction from './cloudfront-functions-stack';
+
+export class HugoPipelineStack extends cdk.Stack {
+  constructor(scope: cdk.Construct, id: string, props: cffunction.CloudFrontFunctionsStackProps) {
     super(scope, id, props);
 
     const PREFIX = this.node.tryGetContext('prefix');
@@ -58,7 +60,13 @@ export class AwsSampleCdkHugoPipelineStack extends cdk.Stack {
         cachedMethods: cloudfront.CachedMethods.CACHE_GET_HEAD,
         compress: true,
         originRequestPolicy: cloudfront.OriginRequestPolicy.CORS_S3_ORIGIN,
-        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS
+        viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        functionAssociations: [
+          {
+            eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
+            function: props.appendIndexCfFunction
+          }
+        ]
       },
       defaultRootObject: 'index.html',
       enableLogging: true,

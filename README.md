@@ -13,7 +13,7 @@ This is a CDK project to build a static web site using Hugo and its delivery pip
 Deploy this CDK project.
 
  * `npm run build`   compile typescript to js
- * `cdk deploy`      deploy this stack to your default AWS account/region
+ * `cdk deploy --all`      deploy this stack to your default AWS account/region
 
 ### Delivery contents
 
@@ -30,8 +30,7 @@ So...
 * `git submodule add https://github.com/theNewDynamic/gohugo-theme-ananke.git themes/ananke`
 * `echo theme = \"ananke\" >> config.toml`
 
-See also : [Hugo: Quick Start](https://gohugo.io/getting-started/quick-start/
-)
+See also : [Hugo: Quick Start](https://gohugo.io/getting-started/quick-start/)
 ### Add some content
 
 * `hugo new posts/my-first-post.md`
@@ -66,8 +65,3 @@ at `cdk.json`
 * `prefix`: prefix for resource logical id and resource name (ex. CodeCommit repository name).
  Default is `hugo-pipeline`
 * `hugoVersion`: Hugo version. Currently it's set `0.88.1`.
-
-## TODO
-
-* ~~Enable access logging for CloudFront~~ ( #1 )
-* Invalidate CloudFront cache when the contents are delivered
